@@ -1,17 +1,35 @@
-/* Modifique o gradiente do body para menos opaco */
+/* Estilo geral otimizado para mobile */
 body {
+    margin: 0;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('homem_de_ferro.jpg');
-    /* Restante do código permanece igual */
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    color: #FFD700;
+    text-align: center;
+    padding: 15px;
+    overflow: auto;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 1.6;
 }
 
-/* Ajuste a opacidade do container */
 .container {
-    background-color: rgba(0, 0, 0, 0.7); /* Reduzi de 0.85 para 0.7 */
-    /* Restante do código permanece igual */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    backdrop-filter: blur(5px);
+    margin: 20px 0;
+    transform: translateZ(0);
 }
 
-/* Ajuste o details para menos opaco */
-.details {
-    background-color: rgba(20, 20, 20, 0.5); /* Reduzi de 0.7 para 0.5 */
-    /* Restante do código permanece igual */
-}
+/* Restante do CSS permanece igual... */
