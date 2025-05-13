@@ -1,77 +1,51 @@
-/* [Manter todos os estilos anteriores até .bbq-section] */
-
-.bbq-section {
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background: rgba(20, 20, 20, 0.7);
-    border: 1px dashed #FFD700;
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.bbq-section h4 {
-    color: #FFD700;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-}
-
-.bbq-notice {
-    background: rgba(230, 36, 41, 0.2);
-    padding: 15px;
-    border-radius: 8px;
-    margin: 15px 0;
-}
-
-.bbq-notice p {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #FFD700;
-}
-
-.bbq-item {
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    padding: 8px;
-    background: rgba(255, 215, 0, 0.1);
-    border-radius: 5px;
+    justify-content: center;
+    align-items: flex-start; /* Alterado para flex-start */
+    padding: 20px 0; /* Adicionado padding */
+    overflow-x: hidden; /* Corrige rolagem horizontal */
 }
 
-.bbq-icon {
-    font-size: 1.5rem;
+.marvel-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('marvel-bg.jpg') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
 }
 
-.bbq-note {
-    font-size: 0.9rem;
-    text-align: center;
-    font-style: italic;
-    color: #FFD700;
-    margin-top: 10px;
+.invite-container {
+    background: rgba(0, 0, 0, 0.85);
+    border: 3px solid #e62429;
+    border-radius: 15px;
+    width: 95%;
+    max-width: 650px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(230, 36, 41, 0.7);
+    margin: 20px auto;
+    overflow: hidden; /* Corrige vazamento de borda */
 }
 
-/* [Manter o restante do CSS anterior] */
+/* [Manter todos os outros estilos anteriores...] */
 
-/* Ajustes para mais personagens */
-.hero-gallery {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 768px) {
-    .hero-gallery {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .hero-image {
-        width: 70px;
-        height: 70px;
-    }
+/* Correção para o confetti não causar rolagem */
+.confetti {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    top: -10px; /* Posição inicial ajustada */
 }
