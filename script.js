@@ -1,33 +1,101 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Elementos
     const musicButton = document.getElementById('musicButton');
     const bgMusic = document.getElementById('bgMusic');
     const confirmButton = document.getElementById('confirmButton');
-    let musicPlaying = false;
     
-    // Controle da música
-    musicButton.addEventListener('click', function() {
-        if (musicPlaying) {
+    // Configurações iniciais
+    bgMusic.volume = 0.7; // Volume moderado
+    let isMusicPlaying = false;
+    const isTouchDevice = 'ontouchstart' in window;
+    
+    // Evento otimizado para o dispositivo
+    const primaryEvent = isTouchDevice ? 'touchend' : 'click';
+    
+    // Controle de música
+    musicButton.addEventListener(primaryEvent, function(e) {
+        if (isTouchDevice) e.preventDefault();
+        
+        if (isMusicPlaying) {
             bgMusic.pause();
-            musicButton.textContent = 'Ligar Música';
-            musicPlaying = false;
+            musicButton.innerHTML = '🎵 Ligar Música';
+            musicButton.style.animation = 'pisca 1.5s infinite alternate';
+            isMusicPlaying = false;
         } else {
-            bgMusic.play();
-            musicButton.textContent = 'Desligar Música';
-            musicPlaying = true;
+            musicButton.innerHTML = '⏳ Carregando...';
+            
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        musicButton.innerHTML = '🔊 Música Tocando';
+                        musicButton.style.animation = 'none';
+                        isMusicPlaying = true;
+                    })
+                    .catch(error => {
+                        musicButton.innerHTML = '🎵 Ligar Música';
+                        if (error.name !== 'NotAllowedError') {
+                            alert('Toque no botão "Ligar Música" para ativar o áudio.');
+                        }
+                    });
+            }
         }
     });
     
     // Confirmação de presença
-    confirmButton.addEventListener('click', function() {
-        const name = prompt('Por favor, digite seu nome para confirmar presença:');
-        if (name) {
-            alert(`Obrigado, ${name}! Sua presença foi confirmada.`);
-            confirmButton.textContent = 'Presença Confirmada!';
-            confirmButton.style.backgroundColor = '#4CAF50';
-            confirmButton.disabled = true;
-        }
+    confirmButton.addEventListener(primaryEvent, function(e) {
+        if (isTouchDevice) e.preventDefault();
+        
+        // Feedback visual imediato
+        this.innerHTML = '...';
+        
+        setTimeout(() => {
+            const userName = prompt('Quem está confirmando presença?');
+            
+            if (userName && userName.trim() !== '') {
+                this.innerHTML = '✅ Confirmado!';
+                this.classList.add('confirmed');
+                this.disabled = true;
+                
+                // Animação de confirmação
+                const check = document.createElement('div');
+                check.className = 'check-animation';
+                this.appendChild(check);
+                
+                setTimeout(() => {
+                    alert(`Obrigado, ${userName.trim()}! Sua presença foi confirmada. 🎉`);
+                }, 300);
+            } else {
+                this.innerHTML = 'Confirmar Presença';
+            }
+        }, 100);
     });
     
-    // Iniciar música automaticamente (opcional)
-    // bgMusic.play().catch(e => console.log("Reprodução automática bloqueada"));
+    // Otimização para dispositivos móveis
+    if (isTouchDevice) {
+        // Previne double tap zoom
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        });
+        
+        // Ajuste para teclado virtual
+        window.addEventListener('resize', function() {
+            if (document.activeElement.tagName === 'INPUT') {
+                document.activeElement.scrollIntoView({ block: 'center' });
+            }
+        });
+    }
+    
+    // Pausa música quando a página não está visível
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden && isMusicPlaying) {
+            bgMusic.pause();
+            musicButton.innerHTML = '🎵 Ligar Música';
+            musicButton.style.animation = 'pisca 1.5s infinite alternate';
+            isMusicPlaying = false;
+        }
+    });
 });
