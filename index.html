@@ -3,37 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite de Aniversário</title>
+    <title>Festa de Aniversário Marvel</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-image"></div>
-    <div class="container">
-        <h1>Você Está Convidado!</h1>
-        <p>Para a minha festa de aniversário</p>
-        
-        <div class="details">
-            <p><strong>Data:</strong> 25/11</p>
-            <p><strong>Hora:</strong> 19h</p>
-            <p><strong>Local:</strong> Mansão Stark</p>
+    <div class="background-overlay"></div>
+    
+    <div class="invite-container">
+        <div class="header">
+            <h1>FESTA DE ANIVERSÁRIO</h1>
+            <h2>Você está convidado!</h2>
         </div>
-
-        <button id="musicButton" class="music-btn">
-            <span class="music-icon">🎵</span>
-            <span class="music-text">Ligar Música</span>
-            <div class="music-waves">
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
+        
+        <div class="content">
+            <div class="hero-selection">
+                <h3>Qual herói/vilão você será?</h3>
+                <div class="hero-grid">
+                    <div class="hero-option" data-hero="Homem de Ferro">🦾<span>Homem de Ferro</span></div>
+                    <div class="hero-option" data-hero="Capitão América">🛡️<span>Capitão América</span></div>
+                    <div class="hero-option" data-hero="Thor">⚡<span>Thor</span></div>
+                    <div class="hero-option" data-hero="Hulk">💪<span>Hulk</span></div>
+                    <div class="hero-option" data-hero="Viúva Negra">🐺<span>Viúva Negra</span></div>
+                    <div class="hero-option" data-hero="Thanos">💎<span>Thanos</span></div>
+                </div>
+                <p class="selected-hero">Personagem selecionado: <span id="hero-choice">Nenhum</span></p>
             </div>
-        </button>
-        
-        <button id="confirmButton">Confirmar Presença</button>
-        
-        <audio id="bgMusic" loop>
-            <source src="musica.mp3" type="audio/mpeg">
-        </audio>
+            
+            <div class="party-info">
+                <h3>📅 Detalhes da Festa</h3>
+                <p><strong>Data:</strong> 25/11 - 19h</p>
+                <p><strong>Local:</strong> Mansão Stark</p>
+                <p><strong>Traje:</strong> Seu personagem Marvel favorito</p>
+                
+                <div class="bbq-info">
+                    <h4>🎉 Kit Churrasco Inclui:</h4>
+                    <ul>
+                        <li>Carnes selecionadas</li>
+                        <li>Bebidas ilimitadas</li>
+                        <li>DJ e karaokê</li>
+                        <li>Competição de cosplay</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="music-control">
+                <button id="musicBtn" class="pulse-glow">
+                    <span class="music-icon">🎵</span>
+                    <span class="music-text">LIGAR MÚSICA TEMÁTICA</span>
+                    <div class="equalizer">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </button>
+            </div>
+            
+            <button id="confirmBtn" class="confirm-btn">CONFIRMAR PRESENÇA</button>
+        </div>
     </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
     
     <script src="script.js"></script>
 </body>
