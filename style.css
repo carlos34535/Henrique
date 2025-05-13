@@ -22,18 +22,19 @@ body {
     background-size: cover;
     background-position: center;
     z-index: -1;
+    opacity: 0.6;
 }
 
 .container {
     position: relative;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     color: #FFD700;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
     width: 90%;
-    max-width: 400px;
-    margin: 50px auto;
+    max-width: 500px;
+    margin: 30px auto;
     border: 2px solid #e62429;
     box-shadow: 0 0 20px rgba(230, 36, 41, 0.5);
 }
@@ -42,6 +43,7 @@ h1 {
     color: #e62429;
     margin-bottom: 15px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    font-size: 2rem;
 }
 
 .details {
@@ -50,6 +52,61 @@ h1 {
 
 .details p {
     margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Seleção de Heróis */
+.hero-selection {
+    margin: 25px 0;
+}
+
+.hero-selection h3 {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.hero-option {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid #e62429;
+    border-radius: 8px;
+    padding: 15px 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.hero-option:hover {
+    background: rgba(230, 36, 41, 0.5);
+    transform: scale(1.05);
+}
+
+.hero-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.hero-name {
+    font-size: 0.9rem;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.selected-hero {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: #FFD700;
+}
+
+#hero-choice {
+    color: #e62429;
+    font-weight: bold;
 }
 
 /* Estilos do botão de música */
@@ -116,6 +173,7 @@ h1 {
     width: 100%;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 #confirmButton:hover {
@@ -123,13 +181,27 @@ h1 {
 }
 
 /* Responsividade */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .hero-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .container {
         margin: 20px auto;
         padding: 15px;
     }
     
     h1 {
-        font-size: 1.5em;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-icon {
+        font-size: 1.8rem;
+    }
+    
+    .hero-name {
+        font-size: 0.8rem;
     }
 }
