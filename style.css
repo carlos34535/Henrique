@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 100%;
+    width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #e62429; /* Vermelho do Homem de Ferro */
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.details {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.details p {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #e62429;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: calc(100% - 10px);
+    max-width: 200px;
+}
+
+button:hover {
+    background-color: #b81d22;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .details p {
+        font-size: 0.9rem;
+    }
+    
+    button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
