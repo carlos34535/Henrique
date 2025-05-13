@@ -1,91 +1,318 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Elementos
-    const musicButton = document.getElementById('musicButton');
-    const bgMusic = document.getElementById('bgMusic');
-    const confirmButton = document.getElementById('confirmButton');
-    const heroCards = document.querySelectorAll('.hero-card');
-    const chosenHeroDisplay = document.getElementById('chosen-hero');
-    const visualizerBars = document.querySelectorAll('.visualizer .bar');
-    
-    // Configuração inicial do áudio
-    bgMusic.volume = 0.5;
-    
-    // Estado
-    let isMusicPlaying = false;
-    let selectedHero = null;
-    
-    // Seleção de Herói
-    heroCards.forEach(card => {
-        card.addEventListener('click', function() {
-            heroCards.forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedHero = this.getAttribute('data-hero');
-            chosenHeroDisplay.textContent = selectedHero;
-            
-            // Efeito visual
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = this.classList.contains('selected') ? 'scale(1.05)' : 'scale(1)';
-            }, 200);
-        });
-    });
-    
-    // Controle de Música
-    musicButton.addEventListener('click', function() {
-        if (isMusicPlaying) {
-            bgMusic.pause();
-            musicButton.querySelector('.text').textContent = 'Tocar Hino dos Vingadores';
-            stopVisualizer();
-            isMusicPlaying = false;
-        } else {
-            musicButton.querySelector('.text').textContent = 'Tocando...';
-            
-            bgMusic.play()
-                .then(() => {
-                    startVisualizer();
-                    isMusicPlaying = true;
-                    musicButton.querySelector('.text').textContent = 'Hino dos Vingadores';
-                })
-                .catch(error => {
-                    musicButton.querySelector('.text').textContent = 'Toque para ativar';
-                    setTimeout(() => {
-                        musicButton.querySelector('.text').textContent = 'Tocar Hino dos Vingadores';
-                    }, 2000);
-                });
-        }
-    });
-    
-    // Animação do Visualizador
-    function startVisualizer() {
-        visualizerBars.forEach(bar => {
-            bar.style.animationPlayState = 'running';
-        });
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.marvel-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/JqYeYnV.jpg') center/cover no-repeat;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.invite-card {
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #e62429;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(230, 36, 41, 0.7);
+}
+
+.header h1 {
+    font-family: 'Bangers', cursive;
+    color: #FFD700;
+    font-size: 3rem;
+    text-align: center;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #e62429;
+    margin-bottom: 5px;
+}
+
+.header h2 {
+    color: #fff;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Seleção de Heróis */
+.hero-selector {
+    margin: 30px 0;
+}
+
+.hero-selector h3 {
+    color: #FFD700;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.hero-option {
+    background: rgba(30, 30, 30, 0.7);
+    border: 2px solid #e62429;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(230, 36, 41, 0.4);
+    background: rgba(230, 36, 41, 0.3);
+}
+
+.hero-option.selected {
+    background: rgba(230, 36, 41, 0.5);
+    border-color: #FFD700;
+    transform: scale(1.05);
+}
+
+.hero-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.hero-option:hover .hero-image {
+    transform: scale(1.1);
+}
+
+.hero-name {
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.hero-option:hover .hero-name {
+    color: white;
+}
+
+.selected-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.selected-container p {
+    font-size: 1.2rem;
+    color: #FFD700;
+}
+
+#chosen-hero {
+    color: #e62429;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Detalhes da Festa */
+.party-details {
+    background: rgba(20, 20, 20, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 25px 0;
+}
+
+.party-details h3 {
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.party-details p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.bbq-section {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(230, 36, 41, 0.2);
+    border: 1px dashed #FFD700;
+}
+
+.bbq-section h4 {
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.bbq-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.bbq-item {
+    background: rgba(255, 215, 0, 0.1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bbq-note {
+    font-size: 0.9rem;
+    text-align: center;
+    font-style: italic;
+    color: #FFD700;
+    margin-top: 10px;
+}
+
+/* Área de Ação */
+.action-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.music-button {
+    background: linear-gradient(45deg, #e62429, #FF4500);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(230, 36, 41, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(230, 36, 41, 0);
+    }
+}
+
+.visualizer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.visualizer .bar {
+    width: 4px;
+    height: 10px;
+    background: white;
+    border-radius: 2px;
+    animation: equalize 1.5s infinite ease-in-out;
+}
+
+.visualizer .bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+.visualizer .bar:nth-child(2) { animation-delay: 0.2s; height: 12px; }
+.visualizer .bar:nth-child(3) { animation-delay: 0.4s; height: 16px; }
+
+@keyframes equalize {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1.5); }
+}
+
+.confirm-button {
+    background: #FFD700;
+    color: #000;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.confirm-button:hover {
+    background: #e62429;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(230, 36, 41, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    function stopVisualizer() {
-        visualizerBars.forEach(bar => {
-            bar.style.animationPlayState = 'paused';
-        });
+    .header h1 {
+        font-size: 2.5rem;
     }
     
-    // Confirmação de Presença
-    confirmButton.addEventListener('click', function() {
-        if (!selectedHero) {
-            alert('Por favor, escolha seu personagem primeiro!');
-            return;
-        }
-        
-        const name = prompt(`${selectedHero}, qual é seu nome verdadeiro?`);
-        
-        if (name && name.trim() !== '') {
-            this.textContent = 'Confirmado ✓';
-            this.style.background = '#4CAF50';
-            this.disabled = true;
-            
-            // Feedback visual
-            setTimeout(() => {
-                alert(`${name} como ${selectedHero} confirmado(a)!\n\nNão esqueça de trazer:\n🍗 1 kg de carne\n🍺 2 litros de bebida\n🧂 1 item de tempero\n\n*Traje completo garante desconto!`);
-            }, 300);
-        }
-    });
-});
+    .header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .invite-card {
+        padding: 20px 15px;
+    }
+    
+    .hero-image {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .music-button, .confirm-button {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    
+    .header h1 {
+        font-size: 2.2rem;
+    }
+}
