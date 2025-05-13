@@ -3,19 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite de Aniversário</title>
+    <title>Convite de Aniversário Marvel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-image"></div>
     <div class="container">
         <h1>Você Está Convidado!</h1>
-        <p>Para a minha festa de aniversário</p>
+        <p>Para a minha festa de aniversário temática Marvel</p>
         
         <div class="details">
             <p><strong>Data:</strong> 25/11</p>
             <p><strong>Hora:</strong> 19h</p>
             <p><strong>Local:</strong> Mansão Stark</p>
+        </div>
+
+        <div class="hero-selection">
+            <h3>Escolha seu personagem:</h3>
+            <div class="hero-grid">
+                <div class="hero-option" data-hero="Homem de Ferro">
+                    <div class="hero-icon">🦾</div>
+                    <div class="hero-name">Homem de Ferro</div>
+                </div>
+                <div class="hero-option" data-hero="Capitão América">
+                    <div class="hero-icon">🛡️</div>
+                    <div class="hero-name">Capitão América</div>
+                </div>
+                <div class="hero-option" data-hero="Thor">
+                    <div class="hero-icon">⚡</div>
+                    <div class="hero-name">Thor</div>
+                </div>
+                <div class="hero-option" data-hero="Hulk">
+                    <div class="hero-icon">💪</div>
+                    <div class="hero-name">Hulk</div>
+                </div>
+                <div class="hero-option" data-hero="Viúva Negra">
+                    <div class="hero-icon">🐺</div>
+                    <div class="hero-name">Viúva Negra</div>
+                </div>
+                <div class="hero-option" data-hero="Thanos">
+                    <div class="hero-icon">💎</div>
+                    <div class="hero-name">Thanos</div>
+                </div>
+            </div>
+            <p class="selected-hero">Você vai como: <span id="hero-choice">Nenhum</span></p>
         </div>
 
         <button id="musicButton" class="music-btn">
