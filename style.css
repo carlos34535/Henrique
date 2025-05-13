@@ -1,80 +1,225 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
+/* Estilo geral otimizado para mobile */
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    margin: 0;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('homem_de_ferro.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    color: #FFD700;
+    text-align: center;
+    padding: 15px;
+    overflow: auto;
+    -webkit-tap-highlight-color: transparent;
     line-height: 1.6;
 }
 
 .container {
-    max-width: 100%;
-    width: 95%;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.hero-image {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    backdrop-filter: blur(5px);
+    margin: 20px 0;
+    transform: translateZ(0);
 }
 
 h1 {
-    color: #e62429; /* Vermelho do Homem de Ferro */
-    margin-bottom: 15px;
-    font-size: 1.8rem;
+    color: #e62429;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    font-size: clamp(1.7rem, 6vw, 2.2rem);
+    line-height: 1.3;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 1.1rem;
 }
 
 .details {
-    background-color: #fff;
+    background-color: rgba(20, 20, 20, 0.7);
     padding: 15px;
     border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 25px 0;
+    border-left: 3px solid #e62429;
 }
 
 .details p {
-    margin: 10px 0;
+    margin: 12px 0;
+    text-align: left;
     font-size: 1rem;
 }
 
+strong {
+    color: #e62429;
+    font-weight: 700;
+}
+
+/* Botões otimizados para touch */
 button {
-    background-color: #e62429;
-    color: white;
+    background-color: #FF4500;
     border: none;
-    padding: 12px 20px;
-    margin: 10px 5px;
-    border-radius: 5px;
-    font-size: 1rem;
+    color: white;
+    padding: 14px 20px;
+    margin: 15px 0;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    width: calc(100% - 10px);
-    max-width: 200px;
+    font-size: 1.1rem;
+    transition: all 0.2s ease-out;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    min-height: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-button:hover {
-    background-color: #b81d22;
+button:active {
+    transform: scale(0.97);
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
+button:hover, button:focus {
+    background-color: #DC143C;
+    outline: none;
+}
+
+#musicButton {
+    animation: pisca 1.5s infinite alternate;
+    background-color: #FF4500;
+}
+
+#confirmButton {
+    background-color: #e62429;
+    border: 1px solid #FFD700;
+}
+
+#confirmButton.confirmed {
+    background-color: #4CAF50;
+    animation: none;
+}
+
+/* Animações */
+@keyframes pisca {
+    0% {
+        box-shadow: 0 0 5px #FF4500;
     }
-    
-    .details p {
-        font-size: 0.9rem;
+    100% {
+        box-shadow: 0 0 15px #FF4500, 0 0 25px rgba(255, 69, 0, 0.6);
+    }
+}
+
+button:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Efeito de confirmação */
+.check-animation {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFD700;
+    border-radius: 50%;
+    animation: check 0.4s ease-out;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    opacity: 0;
+}
+
+@keyframes check {
+    0% {
+        transform: scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        max-width: 350px;
+        padding: 20px 15px;
     }
     
     button {
-        padding: 10px 15px;
-        font-size: 0.9rem;
+        padding: 14px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        background-position: top center;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.7rem;
+    }
+    
+    button {
+        font-size: 1rem;
+        margin: 12px 0;
+    }
+    
+    .details {
+        padding: 12px;
+    }
+    
+    .details p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Previne zoom em inputs em iOS */
+@media (max-width: 480px) {
+    input, select, textarea {
+        font-size: 16px !important;
     }
 }
