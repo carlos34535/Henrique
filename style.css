@@ -1,164 +1,91 @@
-/* Reset e estilos base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #000;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    overflow-x: hidden;
-}
-
-.marvel-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                url('https://i.imgur.com/JqYeYnV.jpg') center/cover no-repeat;
-    z-index: -1;
-}
-
-.invite-container {
-    background: rgba(0, 0, 0, 0.85);
-    border: 3px solid #e62429;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 600px;
-    padding: 25px;
-    box-shadow: 0 0 30px rgba(230, 36, 41, 0.7);
-    margin: 20px auto;
-}
-
-.header h1 {
-    font-family: 'Bangers', cursive;
-    color: #FFD700;
-    font-size: 2.5rem;
-    text-align: center;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #e62429;
-    margin-bottom: 5px;
-}
-
-.header h2 {
-    color: #fff;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Seção de Seleção de Heróis */
-.hero-selector {
-    margin: 25px 0;
-}
-
-.hero-selector h3 {
-    color: #FFD700;
-    font-size: 1.3rem;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.hero-gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.hero-card {
-    background: rgba(30, 30, 30, 0.7);
-    border: 2px solid #e62429;
-    border-radius: 10px;
-    padding: 15px 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hero-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(230, 36, 41, 0.4);
-    background: rgba(230, 36, 41, 0.3);
-}
-
-.hero-card.selected {
-    background: rgba(230, 36, 41, 0.5);
-    border-color: #FFD700;
-    transform: scale(1.05);
-}
-
-.hero-icon {
-    font-size: 2.5rem;
-    margin-bottom: 8px;
-    transition: all 0.3s;
-}
-
-.hero-card:hover .hero-icon {
-    transform: scale(1.2);
-}
-
-.hero-name {
-    color: #FFD700;
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s;
-}
-
-.hero-card:hover .hero-name {
-    color: white;
-}
-
-.selected-container {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.selected-container p {
-    font-size: 1.1rem;
-    color: #FFD700;
-}
-
-#chosen-hero {
-    color: #e62429;
-    font-weight: bold;
-}
-
-/* Restante do CSS permanece igual ao anterior... */
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .hero-gallery {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-gallery {
-        grid-template-columns: repeat(2, 1fr);
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos
+    const musicButton = document.getElementById('musicButton');
+    const bgMusic = document.getElementById('bgMusic');
+    const confirmButton = document.getElementById('confirmButton');
+    const heroCards = document.querySelectorAll('.hero-card');
+    const chosenHeroDisplay = document.getElementById('chosen-hero');
+    const visualizerBars = document.querySelectorAll('.visualizer .bar');
+    
+    // Configuração inicial do áudio
+    bgMusic.volume = 0.5;
+    
+    // Estado
+    let isMusicPlaying = false;
+    let selectedHero = null;
+    
+    // Seleção de Herói
+    heroCards.forEach(card => {
+        card.addEventListener('click', function() {
+            heroCards.forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedHero = this.getAttribute('data-hero');
+            chosenHeroDisplay.textContent = selectedHero;
+            
+            // Efeito visual
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = this.classList.contains('selected') ? 'scale(1.05)' : 'scale(1)';
+            }, 200);
+        });
+    });
+    
+    // Controle de Música
+    musicButton.addEventListener('click', function() {
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicButton.querySelector('.text').textContent = 'Tocar Hino dos Vingadores';
+            stopVisualizer();
+            isMusicPlaying = false;
+        } else {
+            musicButton.querySelector('.text').textContent = 'Tocando...';
+            
+            bgMusic.play()
+                .then(() => {
+                    startVisualizer();
+                    isMusicPlaying = true;
+                    musicButton.querySelector('.text').textContent = 'Hino dos Vingadores';
+                })
+                .catch(error => {
+                    musicButton.querySelector('.text').textContent = 'Toque para ativar';
+                    setTimeout(() => {
+                        musicButton.querySelector('.text').textContent = 'Tocar Hino dos Vingadores';
+                    }, 2000);
+                });
+        }
+    });
+    
+    // Animação do Visualizador
+    function startVisualizer() {
+        visualizerBars.forEach(bar => {
+            bar.style.animationPlayState = 'running';
+        });
     }
     
-    .header h1 {
-        font-size: 2rem;
+    function stopVisualizer() {
+        visualizerBars.forEach(bar => {
+            bar.style.animationPlayState = 'paused';
+        });
     }
     
-    .header h2 {
-        font-size: 1.3rem;
-    }
-    
-    .hero-icon {
-        font-size: 2rem;
-    }
-}
+    // Confirmação de Presença
+    confirmButton.addEventListener('click', function() {
+        if (!selectedHero) {
+            alert('Por favor, escolha seu personagem primeiro!');
+            return;
+        }
+        
+        const name = prompt(`${selectedHero}, qual é seu nome verdadeiro?`);
+        
+        if (name && name.trim() !== '') {
+            this.textContent = 'Confirmado ✓';
+            this.style.background = '#4CAF50';
+            this.disabled = true;
+            
+            // Feedback visual
+            setTimeout(() => {
+                alert(`${name} como ${selectedHero} confirmado(a)!\n\nNão esqueça de trazer:\n🍗 1 kg de carne\n🍺 2 litros de bebida\n🧂 1 item de tempero\n\n*Traje completo garante desconto!`);
+            }, 300);
+        }
+    });
+});
