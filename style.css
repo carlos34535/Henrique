@@ -12,9 +12,9 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alterado para flex-start */
-    padding: 20px 0; /* Adicionado padding */
-    overflow-x: hidden; /* Corrige rolagem horizontal */
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
 }
 
 .marvel-background {
@@ -23,8 +23,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('marvel-bg.jpg') center/cover no-repeat;
-    opacity: 0.3;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://i.imgur.com/JqYeYnV.jpg') center/cover no-repeat;
     z-index: -1;
 }
 
@@ -32,20 +32,133 @@ body {
     background: rgba(0, 0, 0, 0.85);
     border: 3px solid #e62429;
     border-radius: 15px;
-    width: 95%;
-    max-width: 650px;
-    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    padding: 25px;
     box-shadow: 0 0 30px rgba(230, 36, 41, 0.7);
     margin: 20px auto;
-    overflow: hidden; /* Corrige vazamento de borda */
 }
 
-/* [Manter todos os outros estilos anteriores...] */
+.header h1 {
+    font-family: 'Bangers', cursive;
+    color: #FFD700;
+    font-size: 2.5rem;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #e62429;
+    margin-bottom: 5px;
+}
 
-/* Correção para o confetti não causar rolagem */
-.confetti {
-    position: fixed;
-    z-index: 1000;
-    pointer-events: none;
-    top: -10px; /* Posição inicial ajustada */
+.header h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Seção de Seleção de Heróis */
+.hero-selector {
+    margin: 25px 0;
+}
+
+.hero-selector h3 {
+    color: #FFD700;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.hero-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.hero-card {
+    background: rgba(30, 30, 30, 0.7);
+    border: 2px solid #e62429;
+    border-radius: 10px;
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(230, 36, 41, 0.4);
+    background: rgba(230, 36, 41, 0.3);
+}
+
+.hero-card.selected {
+    background: rgba(230, 36, 41, 0.5);
+    border-color: #FFD700;
+    transform: scale(1.05);
+}
+
+.hero-icon {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+}
+
+.hero-card:hover .hero-icon {
+    transform: scale(1.2);
+}
+
+.hero-name {
+    color: #FFD700;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.hero-card:hover .hero-name {
+    color: white;
+}
+
+.selected-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.selected-container p {
+    font-size: 1.1rem;
+    color: #FFD700;
+}
+
+#chosen-hero {
+    color: #e62429;
+    font-weight: bold;
+}
+
+/* Restante do CSS permanece igual ao anterior... */
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .hero-icon {
+        font-size: 2rem;
+    }
 }
