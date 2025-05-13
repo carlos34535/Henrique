@@ -10,7 +10,7 @@
 <body>
     <div class="marvel-background"></div>
     
-    <div class="invite-container">
+    <div class="invite-card">
         <div class="header">
             <h1>FESTA DE ANIVERSÁRIO</h1>
             <h2>Você está convidado!</h2>
@@ -18,42 +18,34 @@
         
         <div class="content">
             <div class="hero-selector">
-                <h3>Escolha sua identidade:</h3>
+                <h3>Escolha seu alter-ego:</h3>
                 <div class="hero-gallery">
                     <!-- Heroínas -->
-                    <div class="hero-card" data-hero="Capitã Marvel">
-                        <div class="hero-icon">💥</div>
+                    <div class="hero-option" data-hero="Capitã Marvel">
+                        <img src="https://i.imgur.com/JqKSlUa.png" alt="Capitã Marvel" class="hero-image">
                         <div class="hero-name">Capitã Marvel</div>
                     </div>
-                    <div class="hero-card" data-hero="Viúva Negra">
-                        <div class="hero-icon">🕷️</div>
+                    <div class="hero-option" data-hero="Viúva Negra">
+                        <img src="https://i.imgur.com/Nl5vTQb.png" alt="Viúva Negra" class="hero-image">
                         <div class="hero-name">Viúva Negra</div>
                     </div>
-                    <div class="hero-card" data-hero="Feiticeira Escarlate">
-                        <div class="hero-icon">🔮</div>
+                    <div class="hero-option" data-hero="Feiticeira Escarlate">
+                        <img src="https://i.imgur.com/Ws3pX9v.png" alt="Feiticeira Escarlate" class="hero-image">
                         <div class="hero-name">Feiticeira Escarlate</div>
                     </div>
-                    <div class="hero-card" data-hero="Gamora">
-                        <div class="hero-icon">⚔️</div>
-                        <div class="hero-name">Gamora</div>
-                    </div>
                     <!-- Heróis -->
-                    <div class="hero-card" data-hero="Homem de Ferro">
-                        <div class="hero-icon">🤖</div>
+                    <div class="hero-option" data-hero="Homem de Ferro">
+                        <img src="https://i.imgur.com/3JQm4hW.png" alt="Homem de Ferro" class="hero-image">
                         <div class="hero-name">Homem de Ferro</div>
                     </div>
-                    <div class="hero-card" data-hero="Capitão América">
-                        <div class="hero-icon">🛡️</div>
+                    <div class="hero-option" data-hero="Capitão América">
+                        <img src="https://i.imgur.com/JuQjgVx.png" alt="Capitão América" class="hero-image">
                         <div class="hero-name">Capitão América</div>
                     </div>
                     <!-- Vilões -->
-                    <div class="hero-card" data-hero="Hela">
-                        <div class="hero-icon">👑</div>
-                        <div class="hero-name">Hela</div>
-                    </div>
-                    <div class="hero-card" data-hero="Nebulosa">
-                        <div class="hero-icon">🔪</div>
-                        <div class="hero-name">Nebulosa</div>
+                    <div class="hero-option" data-hero="Thanos">
+                        <img src="https://i.imgur.com/9VY6ECz.png" alt="Thanos" class="hero-image">
+                        <div class="hero-name">Thanos</div>
                     </div>
                 </div>
                 <div class="selected-container">
@@ -68,30 +60,26 @@
                 <p><strong>Traje:</strong> Seu personagem favorito</p>
                 
                 <div class="bbq-section">
-                    <h4>🍖 CHURRASCO DOS VINGADORES</h4>
-                    <div class="bbq-notice">
-                        <p>Cada herói/vilão deve trazer:</p>
+                    <h4>🍖 Kit Churrasco Obrigatório</h4>
+                    <div class="bbq-items">
                         <div class="bbq-item">
-                            <span class="bbq-icon">🍗</span>
-                            <span>1 kg de carne</span>
+                            <span>🍗</span> 1kg de carne
                         </div>
                         <div class="bbq-item">
-                            <span class="bbq-icon">🍺</span>
-                            <span>2 litros de bebida</span>
+                            <span>🍺</span> 2L de bebida
                         </div>
                         <div class="bbq-item">
-                            <span class="bbq-icon">🧂</span>
-                            <span>1 item de tempero</span>
+                            <span>🧂</span> Temperos
                         </div>
                     </div>
-                    <p class="bbq-note">*Trajes heroicos garantem desconto no consumo!</p>
+                    <p class="bbq-note">Traje completo = desconto especial!</p>
                 </div>
             </div>
 
             <div class="action-area">
                 <button id="musicButton" class="music-button pulse">
                     <span class="icon">🎵</span>
-                    <span class="text">Tocar Hino dos Vingadores</span>
+                    <span class="text">Tocar Música Épica</span>
                     <div class="visualizer">
                         <div class="bar"></div>
                         <div class="bar"></div>
@@ -99,7 +87,7 @@
                     </div>
                 </button>
                 
-                <button id="confirmButton" class="confirm-button">Confirmar Presença</button>
+                <button id="confirmButton" class="confirm-button">CONFIRMAR PRESENÇA</button>
             </div>
         </div>
     </div>
