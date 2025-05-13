@@ -6,134 +6,105 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
     const characterCards = document.querySelectorAll('.character-card');
-    const chosenCharacterElement = document.getElementById('chosen-character');
+    const waves = document.querySelectorAll('.wave');
     
-    // Configurações iniciais
-    bgMusic.volume = 0.7;
+    // Estado
     let isMusicPlaying = false;
     let selectedCharacter = null;
-    const isTouchDevice = 'ontouchstart' in window;
-    const primaryEvent = isTouchDevice ? 'touchend' : 'click';
+    
+    // Controle de música com efeitos
+    musicButton.addEventListener('click', function() {
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicButton.classList.remove('active');
+            musicButton.querySelector('.music-text').textContent = 'Ligar Música';
+            stopWaveAnimation();
+            isMusicPlaying = false;
+        } else {
+            musicButton.classList.add('active');
+            musicButton.querySelector('.music-text').textContent = 'Tocando...';
+            
+            bgMusic.play()
+                .then(() => {
+                    startWaveAnimation();
+                    isMusicPlaying = true;
+                    musicButton.querySelector('.music-text').textContent = 'Música Tocando';
+                })
+                .catch(e => {
+                    musicButton.classList.remove('active');
+                    musicButton.querySelector('.music-text').textContent = 'Toque para ativar';
+                    setTimeout(() => {
+                        musicButton.querySelector('.music-text').textContent = 'Ligar Música';
+                    }, 2000);
+                });
+        }
+    });
+    
+    // Animação das ondas
+    function startWaveAnimation() {
+        waves.forEach(wave => {
+            wave.style.animationPlayState = 'running';
+        });
+    }
+    
+    function stopWaveAnimation() {
+        waves.forEach(wave => {
+            wave.style.animationPlayState = 'paused';
+        });
+    }
+    
+    // Seleção de personagem
+    characterCards.forEach(card => {
+        card.addEventListener('click', function() {
+            characterCards.forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedCharacter = this.getAttribute('data-character');
+        });
+    });
     
     // Controle de abas
     tabButtons.forEach(button => {
-        button.addEventListener(primaryEvent, function(e) {
-            if (isTouchDevice) e.preventDefault();
-            
+        button.addEventListener('click', function() {
             const tabId = this.getAttribute('data-tab');
             
-            // Ativa aba clicada
             tabButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
             
-            // Mostra conteúdo correspondente
             tabContents.forEach(content => content.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
         });
     });
     
-    // Seleção de personagem
-    characterCards.forEach(card => {
-        card.addEventListener(primaryEvent, function(e) {
-            if (isTouchDevice) e.preventDefault();
-            
-            // Remove seleção anterior
-            characterCards.forEach(c => c.classList.remove('selected'));
-            
-            // Seleciona novo personagem
-            this.classList.add('selected');
-            selectedCharacter = this.getAttribute('data-character');
-            chosenCharacterElement.textContent = selectedCharacter;
-            
-            // Efeito visual
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 200);
-        });
-    });
-    
-    // Controle de música
-    musicButton.addEventListener(primaryEvent, function(e) {
-        if (isTouchDevice) e.preventDefault();
-        
-        if (isMusicPlaying) {
-            bgMusic.pause();
-            musicButton.innerHTML = '🎵 Ligar Música';
-            musicButton.style.animation = 'pisca 1.5s infinite alternate';
-            isMusicPlaying = false;
-        } else {
-            musicButton.innerHTML = '⏳ Carregando...';
-            
-            const playPromise = bgMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => {
-                        musicButton.innerHTML = '🔊 Música Tocando';
-                        musicButton.style.animation = 'none';
-                        isMusicPlaying = true;
-                    })
-                    .catch(error => {
-                        musicButton.innerHTML = '🎵 Ligar Música';
-                        if (error.name !== 'NotAllowedError') {
-                            alert('Toque no botão "Ligar Música" para ativar o áudio.');
-                        }
-                    });
-            }
-        }
-    });
-    
-    // Confirmação de presença
-    confirmButton.addEventListener(primaryEvent, function(e) {
-        if (isTouchDevice) e.preventDefault();
-        
+    // Confirmação
+    confirmButton.addEventListener('click', function() {
         if (!selectedCharacter) {
-            alert('Por favor, escolha um personagem antes de confirmar!');
+            alert('Escolha um personagem primeiro!');
             return;
         }
         
-        // Feedback visual imediato
-        this.innerHTML = '...';
-        
-        setTimeout(() => {
-            const userName = prompt('Quem está confirmando presença?');
+        const name = prompt(`Como ${selectedCharacter}, qual é seu nome?`);
+        if (name) {
+            this.textContent = '✓ Confirmado!';
+            this.style.background = '#4CAF50';
+            this.disabled = true;
             
-            if (userName && userName.trim() !== '') {
-                this.innerHTML = '✅ Confirmado!';
-                this.classList.add('confirmed');
-                this.disabled = true;
-                
-                // Animação de confirmação
-                const check = document.createElement('div');
-                check.className = 'check-animation';
-                this.appendChild(check);
-                
-                setTimeout(() => {
-                    alert(`Obrigado, ${userName.trim()}! Sua presença como ${selectedCharacter} foi confirmada. 🎉\n\nTe esperamos na Mansão Stark!`);
-                }, 300);
-            } else {
-                this.innerHTML = 'Confirmar Presença';
-            }
-        }, 100);
-    });
-    
-    // Otimização para dispositivos móveis
-    if (isTouchDevice) {
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        });
-    }
-    
-    // Pausa música quando a página não está visível
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden && isMusicPlaying) {
-            bgMusic.pause();
-            musicButton.innerHTML = '🎵 Ligar Música';
-            musicButton.style.animation = 'pisca 1.5s infinite alternate';
-            isMusicPlaying = false;
+            setTimeout(() => {
+                alert(`${name} como ${selectedCharacter} confirmado!\n\nPrepare-se para a batalha na Mansão Stark!`);
+            }, 300);
         }
     });
+    
+    // Efeito hover para dispositivos com mouse
+    if (!('ontouchstart' in window)) {
+        characterCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('selected')) {
+                    this.style.transform = 'scale(1)';
+                }
+            });
+        });
+    }
 });
