@@ -84,4 +84,43 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (name && name.trim() !== '') {
             this.textContent = 'Confirmado ✓';
-            this.style.background = '#4
+            this.style.background = '#4CAF50';
+            this.disabled = true;
+            
+            // Efeito de confete (ajustado para não causar rolagem)
+            createConfetti();
+            
+            setTimeout(() => {
+                alert(`${name} como ${selectedHero} confirmado(a)!\n\nNão esqueça de trazer:\n🍗 1 kg de carne\n🍺 2 litros de bebida\n🧂 1 item de tempero\n\n*Traje completo garante desconto!`);
+            }, 500);
+        }
+    });
+    
+    // Efeito de Confete (ajustado)
+    function createConfetti() {
+        const colors = ['#FFD700', '#e62429', '#FFFFFF', '#FF4500'];
+        const viewportHeight = window.innerHeight;
+        
+        for (let i = 0; i < 30; i++) { // Reduzido número de confetes
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 8 + 4 + 'px';
+            confetti.style.height = confetti.style.width;
+            document.body.appendChild(confetti);
+            
+            const animationDuration = Math.random() * 2000 + 2000;
+            
+            const animation = confetti.animate([
+                { top: '-10px', opacity: 1, transform: 'rotate(0deg)' },
+                { top: viewportHeight + 'px', opacity: 0, transform: 'rotate(360deg)' }
+            ], {
+                duration: animationDuration,
+                easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+            });
+            
+            animation.onfinish = () => confetti.remove();
+        }
+    }
+});
