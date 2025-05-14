@@ -3,86 +3,92 @@ document.addEventListener('DOMContentLoaded', function() {
     const musicButton = document.getElementById('musicButton');
     const bgMusic = document.getElementById('bgMusic');
     const confirmButton = document.getElementById('confirmButton');
-    const heroOptions = document.querySelectorAll('.hero-option');
-    const chosenHeroDisplay = document.getElementById('chosen-hero');
-    const visualizerBars = document.querySelectorAll('.visualizer .bar');
     
-    // Configuração inicial
-    bgMusic.volume = 0.6;
+    // Configurações iniciais
+    bgMusic.volume = 0.7; // Volume moderado
     let isMusicPlaying = false;
-    let selectedHero = null;
+    const isTouchDevice = 'ontouchstart' in window;
     
-    // Seleção de Herói
-    heroOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            heroOptions.forEach(opt => opt.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedHero = this.getAttribute('data-hero');
-            chosenHeroDisplay.textContent = selectedHero;
-            
-            // Efeito visual
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1.05)';
-            }, 200);
-        });
-    });
+    // Evento otimizado para o dispositivo
+    const primaryEvent = isTouchDevice ? 'touchend' : 'click';
     
-    // Controle de Música
-    musicButton.addEventListener('click', function() {
+    // Controle de música
+    musicButton.addEventListener(primaryEvent, function(e) {
+        if (isTouchDevice) e.preventDefault();
+        
         if (isMusicPlaying) {
             bgMusic.pause();
-            musicButton.querySelector('.text').textContent = 'Tocar Música Épica';
-            stopVisualizer();
+            musicButton.innerHTML = '🎵 Ligar Música';
+            musicButton.style.animation = 'pisca 1.5s infinite alternate';
             isMusicPlaying = false;
         } else {
-            musicButton.querySelector('.text').textContent = 'Tocando...';
+            musicButton.innerHTML = '⏳ Carregando...';
             
-            bgMusic.play()
-                .then(() => {
-                    startVisualizer();
-                    isMusicPlaying = true;
-                    musicButton.querySelector('.text').textContent = 'Música Tocando!';
-                })
-                .catch(error => {
-                    musicButton.querySelector('.text').textContent = 'Toque para ativar';
-                    setTimeout(() => {
-                        musicButton.querySelector('.text').textContent = 'Tocar Música Épica';
-                    }, 2000);
-                });
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        musicButton.innerHTML = '🔊 Música Tocando';
+                        musicButton.style.animation = 'none';
+                        isMusicPlaying = true;
+                    })
+                    .catch(error => {
+                        musicButton.innerHTML = '🎵 Ligar Música';
+                        if (error.name !== 'NotAllowedError') {
+                            alert('Toque no botão "Ligar Música" para ativar o áudio.');
+                        }
+                    });
+            }
         }
     });
     
-    // Animação do Visualizador
-    function startVisualizer() {
-        visualizerBars.forEach(bar => {
-            bar.style.animationPlayState = 'running';
-        });
-    }
-    
-    function stopVisualizer() {
-        visualizerBars.forEach(bar => {
-            bar.style.animationPlayState = 'paused';
-        });
-    }
-    
-    // Confirmação de Presença
-    confirmButton.addEventListener('click', function() {
-        if (!selectedHero) {
-            alert('Por favor, escolha seu personagem primeiro!');
-            return;
-        }
+    // Confirmação de presença
+    confirmButton.addEventListener(primaryEvent, function(e) {
+        if (isTouchDevice) e.preventDefault();
         
-        const name = prompt(`${selectedHero}, qual é seu nome verdadeiro?`);
+        // Feedback visual imediato
+        this.innerHTML = '...';
         
-        if (name && name.trim() !== '') {
-            this.textContent = 'Confirmado ✓';
-            this.style.background = '#4CAF50';
-            this.disabled = true;
+        setTimeout(() => {
+            const userName = prompt('Quem está confirmando presença?');
             
-            setTimeout(() => {
-                alert(`${name} como ${selectedHero} confirmado(a)!\n\nNão esqueça de trazer:\n🍗 1kg de carne\n🍺 2L de bebida\n🧂 Temperos\n\nNos vemos na Mansão Stark!`);
-            }, 300);
+            if (userName && userName.trim() !== '') {
+                this.innerHTML = '✅ Confirmado!';
+                this.classList.add('confirmed');
+                this.disabled = true;
+                
+                // Animação de confirmação
+                const check = document.createElement('div');
+                check.className = 'check-animation';
+                this.appendChild(check);
+                
+                setTimeout(() => {
+                    alert(`Obrigado, ${userName.trim()}! Sua presença foi confirmada. 🎉`);
+                }, 300);
+            } else {
+                this.innerHTML = 'Confirmar Presença';
+            }
+        }, 100);
+    });
+    
+    // Otimização para dispositivos móveis
+    if (isTouchDevice) {
+        // Previne double tap zoom
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        });
+    }
+    
+    // Pausa música quando a página não está visível
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden && isMusicPlaying) {
+            bgMusic.pause();
+            musicButton.innerHTML = '🎵 Ligar Música';
+            musicButton.style.animation = 'pisca 1.5s infinite alternate';
+            isMusicPlaying = false;
         }
     });
 });
