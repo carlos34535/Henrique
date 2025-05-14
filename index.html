@@ -5,90 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite de Aniversário Marvel</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="marvel-background"></div>
-    
-    <div class="invite-card">
-        <div class="header">
-            <h1>FESTA DE ANIVERSÁRIO</h1>
-            <h2>Você está convidado!</h2>
-        </div>
+    <div class="background-image"></div>
+    <div class="container">
+        <h1>Você Está Convidado!</h1>
+        <p>Para a minha festa de aniversário temática Marvel</p>
         
-        <div class="content">
-            <div class="hero-selector">
-                <h3>Escolha seu alter-ego:</h3>
-                <div class="hero-gallery">
-                    <!-- Heróis -->
-                    <div class="hero-card" data-hero="Homem de Ferro">
-                        <img src="ironman.png" alt="Homem de Ferro" class="hero-image">
-                        <div class="hero-name">Homem de Ferro</div>
-                    </div>
-                    <div class="hero-card" data-hero="Capitão América">
-                        <img src="captain.png" alt="Capitão América" class="hero-image">
-                        <div class="hero-name">Capitão América</div>
-                    </div>
-                    <div class="hero-card" data-hero="Thor">
-                        <img src="thor.png" alt="Thor" class="hero-image">
-                        <div class="hero-name">Thor</div>
-                    </div>
-                    <!-- Vilões -->
-                    <div class="hero-card" data-hero="Thanos">
-                        <img src="thanos.png" alt="Thanos" class="hero-image">
-                        <div class="hero-name">Thanos</div>
-                    </div>
-                    <div class="hero-card" data-hero="Loki">
-                        <img src="loki.png" alt="Loki" class="hero-image">
-                        <div class="hero-name">Loki</div>
-                    </div>
-                    <div class="hero-card" data-hero="Feiticeira Escarlate">
-                        <img src="scarlet.png" alt="Feiticeira Escarlate" class="hero-image">
-                        <div class="hero-name">Feiticeira Escarlate</div>
-                    </div>
-                </div>
-                <div class="selected-container">
-                    <p>Você vai como: <span id="chosen-hero">Nenhum</span></p>
-                </div>
-            </div>
-
-            <div class="party-details">
-                <h3>📅 Detalhes do Evento</h3>
-                <p><strong>Data:</strong> 25/11 - 19h</p>
-                <p><strong>Local:</strong> Mansão Stark</p>
-                <p><strong>Traje:</strong> Seu personagem favorito</p>
-                
-                <div class="bbq-section">
-                    <h4>🍖 Churrasco dos Vingadores</h4>
-                    <ul>
-                        <li>Carnes premium</li>
-                        <li>Bebidas especiais</li>
-                        <li>Concurso de cosplay</li>
-                        <li>Prêmios incríveis</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="action-area">
-                <button id="musicButton" class="music-button pulse">
-                    <span class="icon">🎵</span>
-                    <span class="text">Tocar Hino dos Vingadores</span>
-                    <div class="visualizer">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
-                </button>
-                
-                <button id="confirmButton" class="confirm-button">Confirmar Presença</button>
-            </div>
+        <div class="details">
+            <p><strong>Data:</strong> 25/11</p>
+            <p><strong>Hora:</strong> 19h</p>
+            <p><strong>Local:</strong> Mansão Stark</p>
         </div>
+
+        <div class="hero-selection">
+            <h3>Escolha seu personagem:</h3>
+            <div class="hero-grid">
+                <div class="hero-option" data-hero="Homem de Ferro">
+                    <div class="hero-icon">🦾</div>
+                    <div class="hero-name">Homem de Ferro</div>
+                </div>
+                <div class="hero-option" data-hero="Capitão América">
+                    <div class="hero-icon">🛡️</div>
+                    <div class="hero-name">Capitão América</div>
+                </div>
+                <div class="hero-option" data-hero="Thor">
+                    <div class="hero-icon">⚡</div>
+                    <div class="hero-name">Thor</div>
+                </div>
+                <div class="hero-option" data-hero="Hulk">
+                    <div class="hero-icon">💪</div>
+                    <div class="hero-name">Hulk</div>
+                </div>
+                <div class="hero-option" data-hero="Viúva Negra">
+                    <div class="hero-icon">🐺</div>
+                    <div class="hero-name">Viúva Negra</div>
+                </div>
+                <div class="hero-option" data-hero="Thanos">
+                    <div class="hero-icon">💎</div>
+                    <div class="hero-name">Thanos</div>
+                </div>
+            </div>
+            <p class="selected-hero">Você vai como: <span id="hero-choice">Nenhum</span></p>
+        </div>
+
+        <button id="musicButton" class="music-btn">
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Ligar Música</span>
+            <div class="music-waves">
+                <div class="wave"></div>
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+        </button>
+        
+        <button id="confirmButton">Confirmar Presença</button>
+        
+        <audio id="bgMusic" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+        </audio>
     </div>
-
-    <audio id="bgMusic" loop>
-        <source src="avengers-theme.mp3" type="audio/mpeg">
-    </audio>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
