@@ -3,120 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite Marvel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-        }
-        .container {
-            background: rgba(0,0,0,0.8);
-            border: 3px solid #e62429;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #FFD700;
-            text-shadow: 0 0 5px #e62429;
-        }
-        .hero-option {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px;
-            border: 2px solid #e62429;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .hero-option:hover {
-            background: rgba(230,36,41,0.3);
-        }
-        .selected {
-            background: rgba(230,36,41,0.5);
-            border-color: #FFD700;
-        }
-        button {
-            background: #e62429;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Convite de Aniversário Marvel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Festa de Aniversário!</h1>
-        <p>Escolha seu personagem:</p>
-        
-        <div>
-            <!-- Heroínas -->
-            <div class="hero-option" data-hero="Capitã Marvel">💥 Capitã Marvel</div>
-            <div class="hero-option" data-hero="Viúva Negra">🕷️ Viúva Negra</div>
-            <div class="hero-option" data-hero="Feiticeira Escarlate">🔮 Feiticeira Escarlate</div>
-            
-            <!-- Heróis -->
-            <div class="hero-option" data-hero="Homem de Ferro">🤖 Homem de Ferro</div>
-            <div class="hero-option" data-hero="Capitão América">🛡️ Capitão América</div>
-            
-            <!-- Vilões -->
-            <div class="hero-option" data-hero="Thanos">💎 Thanos</div>
+    <div class="marvel-background"></div>
+    
+    <div class="invite-card">
+        <div class="header">
+            <h1>FESTA DE ANIVERSÁRIO</h1>
+            <h2>Você está convidado!</h2>
         </div>
         
-        <p>Você vai como: <span id="chosen-hero">Nenhum</span></p>
-        
-        <h3>📅 25/11 às 19h</h3>
-        <h3>🏰 Mansão Stark</h3>
-        
-        <div style="margin: 20px 0; padding: 10px; background: rgba(230,36,41,0.2); border-radius: 5px;">
-            <p>Traga para o churrasco:</p>
-            <p>🍗 1kg de carne</p>
-            <p>🍺 2L de bebida</p>
-            <p>🧂 Temperos</p>
+        <div class="content">
+            <div class="hero-selector">
+                <h3>Escolha seu alter-ego:</h3>
+                <div class="hero-gallery">
+                    <!-- Heróis -->
+                    <div class="hero-card" data-hero="Homem de Ferro">
+                        <img src="ironman.png" alt="Homem de Ferro" class="hero-image">
+                        <div class="hero-name">Homem de Ferro</div>
+                    </div>
+                    <div class="hero-card" data-hero="Capitão América">
+                        <img src="captain.png" alt="Capitão América" class="hero-image">
+                        <div class="hero-name">Capitão América</div>
+                    </div>
+                    <div class="hero-card" data-hero="Thor">
+                        <img src="thor.png" alt="Thor" class="hero-image">
+                        <div class="hero-name">Thor</div>
+                    </div>
+                    <!-- Vilões -->
+                    <div class="hero-card" data-hero="Thanos">
+                        <img src="thanos.png" alt="Thanos" class="hero-image">
+                        <div class="hero-name">Thanos</div>
+                    </div>
+                    <div class="hero-card" data-hero="Loki">
+                        <img src="loki.png" alt="Loki" class="hero-image">
+                        <div class="hero-name">Loki</div>
+                    </div>
+                    <div class="hero-card" data-hero="Feiticeira Escarlate">
+                        <img src="scarlet.png" alt="Feiticeira Escarlate" class="hero-image">
+                        <div class="hero-name">Feiticeira Escarlate</div>
+                    </div>
+                </div>
+                <div class="selected-container">
+                    <p>Você vai como: <span id="chosen-hero">Nenhum</span></p>
+                </div>
+            </div>
+
+            <div class="party-details">
+                <h3>📅 Detalhes do Evento</h3>
+                <p><strong>Data:</strong> 25/11 - 19h</p>
+                <p><strong>Local:</strong> Mansão Stark</p>
+                <p><strong>Traje:</strong> Seu personagem favorito</p>
+                
+                <div class="bbq-section">
+                    <h4>🍖 Churrasco dos Vingadores</h4>
+                    <ul>
+                        <li>Carnes premium</li>
+                        <li>Bebidas especiais</li>
+                        <li>Concurso de cosplay</li>
+                        <li>Prêmios incríveis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <button id="musicButton" class="music-button pulse">
+                    <span class="icon">🎵</span>
+                    <span class="text">Tocar Hino dos Vingadores</span>
+                    <div class="visualizer">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </button>
+                
+                <button id="confirmButton" class="confirm-button">Confirmar Presença</button>
+            </div>
         </div>
-        
-        <button id="confirmButton">Confirmar Presença</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroOptions = document.querySelectorAll('.hero-option');
-            const confirmButton = document.getElementById('confirmButton');
-            const chosenHeroDisplay = document.getElementById('chosen-hero');
-            let selectedHero = null;
-            
-            // Seleção de personagem
-            heroOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    heroOptions.forEach(opt => opt.classList.remove('selected'));
-                    this.classList.add('selected');
-                    selectedHero = this.getAttribute('data-hero');
-                    chosenHeroDisplay.textContent = selectedHero;
-                });
-            });
-            
-            // Confirmação
-            confirmButton.addEventListener('click', function() {
-                if (!selectedHero) {
-                    alert('Escolha um personagem primeiro!');
-                    return;
-                }
-                
-                const name = prompt(`Como ${selectedHero}, qual seu nome?`);
-                if (name) {
-                    this.textContent = 'Confirmado! ✓';
-                    this.style.background = '#4CAF50';
-                    alert(`${name} como ${selectedHero} confirmado!\n\nNão esqueça os itens do churrasco!`);
-                }
-            });
-        });
-    </script>
+    <audio id="bgMusic" loop>
+        <source src="avengers-theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
