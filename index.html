@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Convite Marvel</title>
+    <title>Convite de Aniversário | Homem de Ferro</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -11,54 +11,21 @@
 <body>
     <div class="container">
         <h1>Você Está Convidado!</h1>
+        <p>Para a minha festa de aniversário</p>
         
         <div class="details">
-            <p><strong>Data:</strong> 25/11</p>
-            <p><strong>Hora:</strong> 19h</p>
+            <p><strong>Data:</strong> 25 de Novembro</p>
+            <p><strong>Horário:</strong> 19:00</p>
             <p><strong>Local:</strong> Mansão Stark</p>
+            <p><strong>Traje:</strong> Herói ou Vilão</p>
         </div>
-
-        <div class="character-selection">
-            <div class="tabs">
-                <button class="tab-button active" data-tab="heroes">Heróis</button>
-                <button class="tab-button" data-tab="villains">Vilões</button>
-            </div>
-
-            <div class="tab-content active" id="heroes">
-                <div class="characters-grid">
-                    <div class="character-card" data-character="Homem de Ferro">🦾</div>
-                    <div class="character-card" data-character="Capitã Marvel">💫</div>
-                    <div class="character-card" data-character="Pantera Negra">🐾</div>
-                    <div class="character-card" data-character="Thor">⚡</div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="villains">
-                <div class="characters-grid">
-                    <div class="character-card" data-character="Thanos">💎</div>
-                    <div class="character-card" data-character="Loki">🃏</div>
-                    <div class="character-card" data-character="Duende Verde">🎃</div>
-                    <div class="character-card" data-character="Magneto">🧲</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="music-button-container">
-            <button id="musicButton" class="pulse">
-                <span class="music-icon">🎵</span>
-                <span class="music-text">Ligar Música</span>
-                <div class="music-waves">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                </div>
-            </button>
-        </div>
-
+        
+        <button id="musicButton">🎵 Ligar Música</button>
         <button id="confirmButton">Confirmar Presença</button>
         
         <audio id="bgMusic" loop>
             <source src="musica.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
         </audio>
     </div>
     
