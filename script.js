@@ -80,6 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
             }, { passive: false });
         });
+        
+        // Ajuste para teclado virtual
+        window.addEventListener('resize', function() {
+            if (document.activeElement.tagName === 'INPUT') {
+                document.activeElement.scrollIntoView({ block: 'center' });
+            }
+        });
     }
     
     // Pausa música quando a página não está visível
