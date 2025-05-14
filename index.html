@@ -3,265 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite Marvel - Festa Incrível!</title>
+    <title>Convite Marvel</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #f0131e; /* Vermelho Marvel */
-            margin: 0;
-            padding: 0;
-            color: white;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
             text-align: center;
-            background-image: url('https://i.imgur.com/XW8tQ1W.jpg');
-            background-size: cover;
-            background-attachment: fixed;
+            padding: 20px;
         }
-
         .container {
-            max-width: 800px;
+            background: rgba(0,0,0,0.8);
+            border: 3px solid #e62429;
+            border-radius: 10px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 0 20px gold;
-            margin-top: 30px;
-            margin-bottom: 30px;
         }
-
         h1 {
-            color: gold;
-            font-size: 2.5em;
-            text-shadow: 3px 3px 5px #000;
-            animation: pulse 2s infinite;
+            color: #FFD700;
+            text-shadow: 0 0 5px #e62429;
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .characters {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .character {
-            width: 150px;
-            height: 180px;
-            border: 3px solid gold;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .character:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px gold;
-        }
-
-        .character.selected {
-            border-color: #f0131e;
-            box-shadow: 0 0 20px #f0131e;
-        }
-
-        .character img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-
-        .character p {
-            margin: 5px 0;
-            font-weight: bold;
-        }
-
-        .music-control {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: rgba(240, 19, 30, 0.3);
-            border-radius: 10px;
+        .hero-option {
             display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #e62429;
+            border-radius: 5px;
+            cursor: pointer;
         }
-
+        .hero-option:hover {
+            background: rgba(230,36,41,0.3);
+        }
+        .hero-option img {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+        }
         button {
-            background-color: gold;
-            color: #000;
+            background: #e62429;
+            color: white;
             border: none;
             padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
             margin: 10px;
-            transition: all 0.3s;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-
-        button:hover {
-            background-color: #f0131e;
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .details {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: gold;
-            animation: fall 5s linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>FESTA MARVEL!</h1>
-        <p>Você está convidado para uma aventura incrível!</p>
+        <h1>Festa de Aniversário Marvel!</h1>
+        <p>Escolha seu personagem:</p>
         
-        <div class="music-control">
-            <p>Ativar música tema:</p>
-            <button id="playButton">▶️ Tocar Música</button>
-            <button id="stopButton">⏹️ Parar Música</button>
-            <audio id="bgMusic" loop>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                Seu navegador não suporta áudio.
-            </audio>
+        <!-- Heroínas -->
+        <div class="hero-option" data-hero="Capitã Marvel">
+            <img src="imagens/capitamarvel.png" alt="Capitã Marvel">
+            <p>Capitã Marvel</p>
+        </div>
+        <div class="hero-option" data-hero="Viúva Negra">
+            <img src="imagens/viuvanegra.jpg" alt="Viúva Negra">
+            <p>Viúva Negra</p>
         </div>
         
-        <h2>Escolha seu herói favorito:</h2>
-        <div class="characters">
-            <!-- Personagens Femininos -->
-            <div class="character" data-character="homemaranha">
-                <img src="https://i.imgur.com/7Y6D8vK.jpg" alt="Homem-Aranha">
-                <p>Homem-Aranha</p>
-            </div>
-            <div class="character" data-character="thor">
-                <img src="https://i.imgur.com/4QnCdhl.jpg" alt="Thor">
-                <p>Thor</p>
-            </div>
-            <div class="character" data-character="hulk">
-                <img src="https://i.imgur.com/9XaZQbW.jpg" alt="Hulk">
-                <p>Hulk</p>
-            </div>
-            <div class="character" data-character="homemdeferro">
-                <img src="https://i.imgur.com/3vQZQ9W.jpg" alt="Homem de Ferro">
-                <p>Homem de Ferro</p>
-            </div>
-            
-            <!-- Personagens Masculinos -->
-            <div class="character" data-character="viuva negra">
-                <img src="https://i.imgur.com/5vQZQ9W.jpg" alt="Viúva Negra">
-                <p>Viúva Negra</p>
-            </div>
-            <div class="character" data-character="capitamarvel">
-                <img src="https://i.imgur.com/6vQZQ9W.jpg" alt="Capitã Marvel">
-                <p>Capitã Marvel</p>
-            </div>
-            <div class="character" data-character="feiticeiraescarlate">
-                <img src="https://i.imgur.com/7vQZQ9W.jpg" alt="Feiticeira Escarlate">
-                <p>Feiticeira Escarlate</p>
-            </div>
-            <div class="character" data-character="gamora">
-                <img src="https://i.imgur.com/8vQZQ9W.jpg" alt="Gamora">
-                <p>Gamora</p>
-            </div>
+        <!-- Heróis -->
+        <div class="hero-option" data-hero="Homem de Ferro">
+            <img src="imagens/homemdeferro.jpg" alt="Homem de Ferro">
+            <p>Homem de Ferro</p>
         </div>
         
-        <div class="details">
-            <h2>Detalhes da Festa</h2>
-            <p>📅 Data: [INSIRA A DATA AQUI]</p>
-            <p>⏰ Horário: [INSIRA O HORÁRIO AQUI]</p>
-            <p>📍 Local: [INSIRA O LOCAL AQUI]</p>
-            <p>🎉 Traje seu personagem Marvel favorito!</p>
+        <!-- Vilões -->
+        <div class="hero-option" data-hero="Thanos">
+            <img src="imagens/thanos.jpg" alt="Thanos">
+            <p>Thanos</p>
         </div>
         
-        <button id="confirmButton">Confirmar Presença!</button>
+        <p>Você vai como: <strong id="chosen-hero" style="color:#FFD700">Nenhum</strong></p>
+        
+        <h3>📅 25/11 às 19h</h3>
+        <h3>🏰 Mansão Stark</h3>
+        
+        <div style="margin: 20px 0; padding: 10px; background: rgba(230,36,41,0.2); border-radius: 5px;">
+            <p>Traga para o churrasco:</p>
+            <p>🍗 1kg de carne</p>
+            <p>🍺 2L de bebida</p>
+            <p>🧂 Temperos</p>
+        </div>
+        
+        <button id="confirmButton">Confirmar Presença</button>
     </div>
 
     <script>
-        // Controles de música
-        const playButton = document.getElementById('playButton');
-        const stopButton = document.getElementById('stopButton');
-        const bgMusic = document.getElementById('bgMusic');
-        
-        playButton.addEventListener('click', () => {
-            bgMusic.play();
-            createConfetti();
-        });
-        
-        stopButton.addEventListener('click', () => {
-            bgMusic.pause();
-        });
-        
-        // Seleção de personagens
-        const characters = document.querySelectorAll('.character');
-        let selectedCharacter = null;
-        
-        characters.forEach(character => {
-            character.addEventListener('click', () => {
-                if (selectedCharacter) {
-                    selectedCharacter.classList.remove('selected');
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroOptions = document.querySelectorAll('.hero-option');
+            const confirmButton = document.getElementById('confirmButton');
+            const chosenHeroDisplay = document.getElementById('chosen-hero');
+            let selectedHero = null;
+            
+            heroOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    heroOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedHero = this.getAttribute('data-hero');
+                    chosenHeroDisplay.textContent = selectedHero;
+                });
+            });
+            
+            confirmButton.addEventListener('click', function() {
+                if (!selectedHero) {
+                    alert('Escolha um personagem primeiro!');
+                    return;
                 }
                 
-                character.classList.add('selected');
-                selectedCharacter = character;
-                
-                // Efeito visual
-                createConfetti();
+                const name = prompt(`Como ${selectedHero}, qual seu nome?`);
+                if (name) {
+                    this.textContent = 'Confirmado! ✓';
+                    this.style.background = '#4CAF50';
+                    alert(`${name} como ${selectedHero} confirmado!\n\nNão esqueça os itens do churrasco!`);
+                }
             });
         });
-        
-        // Botão de confirmação
-        const confirmButton = document.getElementById('confirmButton');
-        confirmButton.addEventListener('click', () => {
-            if (selectedCharacter) {
-                alert(`Incrível! Você virá como ${selectedCharacter.querySelector('p').textContent}! Mal podemos esperar para te ver na festa!`);
-            } else {
-                alert('Obrigado por confirmar presença! Não esqueça de escolher seu personagem favorito!');
-            }
-            createConfetti(100);
-        });
-        
-        // Efeito de confete
-        function createConfetti(count = 30) {
-            for (let i = 0; i < count; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = getRandomColor();
-                confetti.style.width = Math.random() * 10 + 5 + 'px';
-                confetti.style.height = Math.random() * 10 + 5 + 'px';
-                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
-        
-        function getRandomColor() {
-            const colors = ['gold', '#f0131e', '#0099ff', '#ffffff'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
     </script>
 </body>
 </html>
